@@ -87,7 +87,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
             layer.open({
                 type: 2,
                 title: '货运单 - ' + data.goodsBillCode + ' 中转信息填写',
-                content: [ 'writeInfo.html?billCode=' + data.goodsBillCode, 'no' ],
+                content: [ 'writeInfo.html?billCode=' + data.goodsBillCode+'&transferStation='+data.transferStation, 'no' ],
                 area: [ '85%', '85%' ],
                 shadeClose: true,
                 move: false,

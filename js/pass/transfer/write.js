@@ -7,10 +7,13 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
 
     let driverId = $.cookie("loginId");
     let goodsBillCode = window.location.href.split("=")[1];
+    let transferStation = window.location.href.split("=")[2];
+
+//  alert("transferStation"+transferStation);
     
     $.ajax({
         type: 'get',
-        url: nginx_url + '/transfer/detail/' + goodsBillCode,
+        url: nginx_url + '/transfer/detail/' + goodsBillCode+'='+transferStation,
         dataType: 'json',
         async: false,
         success: function (result) {
