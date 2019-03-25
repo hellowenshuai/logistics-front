@@ -6,14 +6,15 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
         table = layui.table;
 
     let driverId = $.cookie("loginId");
-    let goodsBillCode = window.location.href.split("=")[1];
+    let goodsBillCode2 = window.location.href.split("=")[1];
+    let goodsBillCode = goodsBillCode2.split("&")[0];
     let transferStation = window.location.href.split("=")[2];
 
 //  alert("transferStation"+transferStation);
     
     $.ajax({
         type: 'get',
-        url: nginx_url + '/transfer/detail/' + goodsBillCode+'='+transferStation,
+        url: nginx_url + '/transfer/detail/' + goodsBillCode+'?transferStation='+transferStation,
         dataType: 'json',
         async: false,
         success: function (result) {

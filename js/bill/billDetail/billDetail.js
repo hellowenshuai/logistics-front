@@ -10,7 +10,7 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table'], function() {
         height: 'full-170',
         url: nginx_url + '/bill/findNotRelease', //数据接口
         limit: 10,
-        limits: [ 10 ],
+        limits: [10],
         request: {
             pageName: 'pageNum' //页码的参数名称，默认：page
             ,limitName: 'limit' //每页数据量的参数名，默认：limit
@@ -26,9 +26,9 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table'], function() {
         ,cellMinWidth: 60
         ,cols: [[
             { title: 'ID', fixed: 'left', type: 'numbers', align: 'center' },
-            { field: 'billCode', title: '货运单编号', align: "center", sort: true },
-            { field: 'billState', title: '单据状态', align: "center", sort: true },
-            { field: 'writeDate', title: '填写日期', align: 'center', templet: '#createTime' },
+            { field: 'billCode', title: '货运单编号', align: "center",sort: true  },
+            { field: 'billState', title: '单据状态', align: "center" ,sort: true },
+            { field: 'writeDate', title: '填写日期', align: 'center', templet: '#createTime',sort: true },
             { fixed: 'right', title:"操作", align: "center", toolbar: '#barDemo', width: 200 }
         ]]
     });

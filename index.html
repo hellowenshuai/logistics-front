@@ -12,7 +12,6 @@
     <div class="layui-header">
         <div class="layui-logo">国际物流管理系统</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
-1111
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;" id="username">
@@ -20,7 +19,7 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">修改密码</a></dd>
+                    <dd><a href="" onclick="changePassword()">修改密码</a></dd>
                     <dd><a href="javascript:;" onclick="logout()">退出</a></dd>
                 </dl>
             </li>
@@ -63,7 +62,9 @@
                     	到货管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" data-url="html/getGoodsControl/callback/driverCallback.html" data-id="7" data-text="到货回执">到货回执</a></dd>
+<!--
                         <dd><a href="javascript:;" data-url="html/getGoodsControl/verify/verify.html" data-id="8" data-text="到货验收">到货验收</a></dd>
+-->
                     </dl>
                 </li>
                 <li class="layui-nav-item" id="function_5">
@@ -82,7 +83,9 @@
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" data-url="html/clearControl/goodsBill/goodsBillManage.html" data-id="11" data-text="货运单结算">货运单结算</a></dd>
                         <dd><a href="javascript:;" data-url="html/clearControl/transport/transportManage.html" data-id="12" data-text="运输合同结算">运输合同结算</a></dd>
+<!--
                         <dd><a href="javascript:;" data-url="html/clearControl/wait/proxyFee.html" data-id="13" data-text="代收款结算">代收款结算</a></dd>
+-->
                         <dd><a href="javascript:;" data-url="html/clearControl/extra/extraFee.html" data-id="14" data-text="其它结算">其它结算</a></dd>
                     </dl>
                 </li>
@@ -133,7 +136,7 @@
                     	系统管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" data-url="html/systemControl/userGroup/userGroupManage.html" data-id="31" data-text="用户组设置">用户组设置</a></dd>
-                        <dd><a href="javascript:;" data-url="html/systemControl/changePassword.html" data-id="33" data-text="修改密码">修改密码</a></dd>
+                        <dd><a href="javascript:;" data-url="html/systemControl/changePassword.html" data-id="33" data-text="修改密码" id="updatePassword">修改密码</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -147,7 +150,9 @@
                 <li class="layui-this welcome"> 国际物流管理系统 </li>
             </ul>
             <div class="layui-tab-content">
-                <div class="layui-tab-item layui-show" style="background: #f5f5f5;"></div>
+                <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
+
+                </div>
             </div>
         </div>
     </div>

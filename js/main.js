@@ -1,5 +1,8 @@
+/*获取当前cookie*/
 let login = $.cookie("loginId");
+//定义权限id数组
 let funArray = [];
+//获取所有权限id
 $.ajax({
     type: 'get',
     url: nginx_url + '/selectFunc/' + login,
@@ -12,13 +15,14 @@ $.ajax({
         })
     }
 });
-
+//移除权限菜单
 for (let i = 1; i <= 11; i++) {
     if ($.inArray(i, funArray) == -1) {
         $("#function_" + i).remove();
     }
 }
 
+//加载主框架
 layui.use(['layer', 'form', 'element', 'jquery'], function() {
     let element = layui.element,
     $ = layui.jquery,
@@ -33,6 +37,7 @@ layui.use(['layer', 'form', 'element', 'jquery'], function() {
         let url = nav_a.attr('data-url');
         let text = nav_a.attr('data-text');
 
+        //司机和客户是看到不一样的网页
         if (id === '7') {
             let loginId = $.cookie('loginId');
             let type = loginId.slice(0, 2);
