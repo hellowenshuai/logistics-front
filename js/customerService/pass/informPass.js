@@ -39,6 +39,7 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table', 'laydate'], function()
             ,cols: [[
                 { title: 'ID', fixed: 'left', type: 'numbers', align: 'center' },
                 { field: 'goodsBillCode', title: '货运单编号', align: "center", sort: true },
+                { field: 'transferStation', title: '中转城市', align: 'center' },
                 { field: 'sendGoodsCustomer', title: '发货客户姓名', align: 'center' },
                 { field: 'sendGoodsCustomerTel', title: '发货客户电话', align: 'center' },
                 { field: 'receiveGoodsCustomer', title: '收货客户姓名', align: 'center' },

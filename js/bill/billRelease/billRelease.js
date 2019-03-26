@@ -1,4 +1,4 @@
-layui.use(['layer', 'form', 'element', 'jquery', 'table'], function() {
+layui.use(['layer', 'form', 'element', 'jquery', 'table'], function () {
     let element = layui.element,
         $ = layui.jquery,
         layer = layui.layer,
@@ -12,8 +12,8 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table'], function() {
             elem: '#billTable',
             height: 'full-170',
             url: nginx_url + '/bill/findNotRelease', //数据接口
-            limit: 10,
-            limits: [10],
+            limit: 5,
+            limits: [5, 10],
             request: {
                 pageName: 'pageNum' //页码的参数名称，默认：page
                 , limitName: 'limit' //每页数据量的参数名，默认：limit
@@ -36,7 +36,7 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table'], function() {
         });
     }
 
-    element.on('tab(demo)', function(data){
+    element.on('tab(demo)', function (data) {
         if (data.index === 0) {
             refresh();
         } else {
@@ -44,8 +44,8 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table'], function() {
                 elem: '#billTable1',
                 height: 'full-170',
                 url: nginx_url + '/bill/findByPage', //数据接口
-                limit: 10,
-                limits: [ 10 ],
+                limit: 5,
+                limits: [5, 10],
                 request: {
                     pageName: 'pageNum' //页码的参数名称，默认：page
                     , limitName: 'limit' //每页数据量的参数名，默认：limit
@@ -60,16 +60,16 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table'], function() {
                 page: true //开启分页
                 , cellMinWidth: 60
                 , cols: [[
-                    { title: 'ID', fixed: 'left', type: 'numbers', align: 'center' },
-                    { field: 'billType', title: '单据类型', align: "center", sort: true },
-                    { field: 'billCode', title: '单据编号', align: 'center' },
-                    { field: 'writeDate', title: '填写日期', align: 'center', templet: '#createTime' }
+                    {title: 'ID', fixed: 'left', type: 'numbers', align: 'center'},
+                    {field: 'billType', title: '单据类型', align: "center", sort: true},
+                    {field: 'billCode', title: '单据编号', align: 'center'},
+                    {field: 'writeDate', title: '填写日期', align: 'center', templet: '#createTime'}
                 ]]
             });
         }
     });
 
-    table.on('tool(billTool)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+    table.on('tool(billTool)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         let data = obj.data; //获得当前行数据
         let layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
         // let tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -81,7 +81,7 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table'], function() {
             area: ['75%', '75%'],
             shadeClose: true,
             move: false,
-            end: function() {
+            end: function () {
                 table.reload('billTable', {
                     url: nginx_url + '/bill/findNotRelease'
                 })
@@ -91,7 +91,7 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table'], function() {
 
 });
 
-function createTime(v){
+function createTime(v) {
     let dateTime;
     let date = new Date();
     date.setTime(v);

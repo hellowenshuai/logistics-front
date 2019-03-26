@@ -7,7 +7,7 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table', 'laydate'], function()
         laydate = layui.laydate;
 
     let employeeCode = $.cookie('loginId');
-
+    let href = window.location.href;
     let type = decodeURI(window.location.href.split('=')[2]);
     let goodsBillCode = window.location.href.split('=')[1].split('&')[0];
 
@@ -19,6 +19,7 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table', 'laydate'], function()
         success: function (result) {
             console.log(result);
             $("#type").val(type);
+            $("#transferStation").val(result.transferStation);
             $("#writer").val(employeeCode);
             $("#dialNo").val(type === '提货回告' ? result.receiveGoodsCustomerTel : result.sendGoodsCustomerTel);
             laydate.render({
