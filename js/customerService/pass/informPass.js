@@ -39,7 +39,7 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table', 'laydate'], function()
             ,cols: [[
                 { title: 'ID', fixed: 'left', type: 'numbers', align: 'center' },
                 { field: 'goodsBillCode', title: '货运单编号', align: "center", sort: true },
-                { field: 'transferStation', title: '中转城市', align: 'center' },
+                { field: 'transferStation', title: '中转地', align: "center", sort: true },
                 { field: 'sendGoodsCustomer', title: '发货客户姓名', align: 'center' },
                 { field: 'sendGoodsCustomerTel', title: '发货客户电话', align: 'center' },
                 { field: 'receiveGoodsCustomer', title: '收货客户姓名', align: 'center' },
@@ -57,7 +57,7 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table', 'laydate'], function()
             layer.open({
                 type: 2,
                 title: data.goodsBillCode + ' - 货物中转回告填写',
-                content: ['../writeInform.html?id=' + data.goodsBillCode + '&type=中转回告'],
+                content: ['../writeInform.html?id=' + data.goodsBillCode + '&type=中转回告'+'&transferStation='+data.transferStation],
                 area: ['85%', '85%'],
                 shadeClose: true,
                 move: false,
