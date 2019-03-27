@@ -71,6 +71,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
                 { title: 'ID', fixed: 'left', type: 'numbers', align: 'center' },
                 { field: 'goodsBillCode', title: '货运单编号', align: 'center' },
                 { field: 'sendGoodsCustomer', title: '发货客户', align: "center" },
+                { field: 'transferStation', title: '中转地', align: "center" },
                 { field: 'receiveGoodsCustomer', title: '收货客户', align: 'center' },
                 { field: 'sendGoodsDate', title: '发货日期', align: 'center', templet: '#createTime' },
                 { title: "操作", align: "center", width: 200, fixed: 'right', toolbar: '#bar' }

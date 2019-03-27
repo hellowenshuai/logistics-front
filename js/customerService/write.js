@@ -1,4 +1,4 @@
-layui.use(['layer', 'form', 'element', 'jquery', 'table', 'laydate'], function() {
+layui.use(['layer', 'form', 'element', 'jquery', 'table', 'laydate'], function () {
     let element = layui.element,
         $ = layui.jquery,
         layer = layui.layer,
@@ -8,7 +8,9 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table', 'laydate'], function()
 
     let employeeCode = $.cookie('loginId');
 
-    let type = decodeURI(window.location.href.split('=')[2]);
+    let transferStation = decodeURI(window.location.href.split('=')[3]);
+    let s = transferStation.toString();
+    let type = decodeURI(window.location.href.split('=')[2]).split('&')[0];
     let goodsBillCode = window.location.href.split('=')[1].split('&')[0];
 
     $.ajax({
@@ -20,6 +22,13 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table', 'laydate'], function()
             console.log(result);
             $("#type").val(type);
             $("#writer").val(employeeCode);
+            //只有是中转回告时 ，才有中转地
+            if (typeof (transferStation) == "string" && s.toString() === 'undefined') {
+                $("#transferStation_item").css('display', 'none');
+            } else {
+                $("#transferStation").val(transferStation);
+            }
+            console.log("transferStation:" + typeof (transferStation));
             $("#dialNo").val(type === '提货回告' ? result.receiveGoodsCustomerTel : result.sendGoodsCustomerTel);
             laydate.render({
                 elem: "#writeTime",
