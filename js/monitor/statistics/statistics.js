@@ -1,56 +1,59 @@
-layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function(){
+layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function () {
     let element = layui.element,
-    form = layui.form,
-    laydate = layui.laydate,
-    layer = layui.layer,
-    table = layui.table,
-    $ = layui.jquery;
+        form = layui.form,
+        laydate = layui.laydate,
+        layer = layui.layer,
+        table = layui.table,
+        $ = layui.jquery;
 
     $(function () {
         refreshTable();
     });
 
-    element.on('tab(demo)', function(data){
+    element.on('tab(demo)', function (data) {
         if (data.index === 0) {
 
             refreshTable();
 
         } else if (data.index === 1) {
-            table.render({
-                elem: '#lineOverallTable',
-                height: 'full-170',
-                url: nginx_url + '/monitor/printLineOverall', //数据接口
-                limit: 10,
-                limits: [ 10 ],
-                request: {
-                    pageName: 'pageNum', //页码的参数名称，默认：page
-                    limitName: 'limit' //每页数据量的参数名，默认：limit
-                },
-                response: {
-                    statusName: 'code', //数据状态的字段名称，默认：code
-                    statusCode: 200, //成功的状态码，默认：0
-                    msgName: 'msg', //状态信息的字段名称，默认：msg
-                    countName: 'count', //数据总数的字段名称，默认：count
-                    dataName: 'data' //数据列表的字段名称，默认：data
-                },
-                page: true, //开启分页
-                cellMinWidth: 80,
-                cols: [[
-                    { title: 'ID', fixed: 'left', sort: true, type: 'numbers' },
-                    { field: 'loadStation', title: '装货地点', sort: true },
-                    { field: 'dealGoodsStation', title: '交货地点' },
-                    { field: 'allCarriageTotal', title: '总运费总计', sort: true },
-                    { field: 'insuranceTotal', title: '保险费总计' },
-                    { field: 'times', title: '次数' }
-                ]]
-            });
+            // table.render({
+            //     elem: '#lineOverallTable',
+            //     height: 'full-170',
+            //     url: nginx_url + '/monitor/printLineOverall', //数据接口
+            //     limit: 10,
+            //     limits: [10],
+            //     request: {
+            //         pageName: 'pageNum', //页码的参数名称，默认：page
+            //         limitName: 'limit' //每页数据量的参数名，默认：limit
+            //     },
+            //     response: {
+            //         statusName: 'code', //数据状态的字段名称，默认：code
+            //         statusCode: 200, //成功的状态码，默认：0
+            //         msgName: 'msg', //状态信息的字段名称，默认：msg
+            //         countName: 'count', //数据总数的字段名称，默认：count
+            //         dataName: 'data' //数据列表的字段名称，默认：data
+            //     },
+            //     page: true, //开启分页
+            //     cellMinWidth: 80,
+            //     cols: [[
+            //         {title: 'ID', fixed: 'left', sort: true, type: 'numbers'},
+            //         {field: 'loadStation', title: '装货地点', sort: true},
+            //         {field: 'dealGoodsStation', title: '交货地点'},
+            //         {field: 'allCarriageTotal', title: '总运费总计', sort: true},
+            //         {field: 'insuranceTotal', title: '保险费总计'},
+            //         {field: 'times', title: '次数'}
+            //     ]]
+            // });
+            // console.log("data"+data);
+            buildData();
+            layer.msg('hello');
         } else if (data.index === 2) {
             table.render({
                 elem: '#driverAmountTable',
                 height: 'full-170',
                 url: nginx_url + '/monitor/selectDriAcount', //数据接口
                 limit: 10,
-                limits: [ 10 ],
+                limits: [10],
                 request: {
                     pageName: 'pageNum', //页码的参数名称，默认：page
                     limitName: 'limit' //每页数据量的参数名，默认：limit
@@ -65,11 +68,11 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function()
                 page: true, //开启分页
                 cellMinWidth: 80,
                 cols: [[
-                    { title: 'ID', fixed: 'left', sort: true, type: 'numbers' },
-                    { field: 'driverCode', title: '司机编号', sort: true },
-                    { field: 'carryFeeTotal', title: '承运费总计' },
-                    { field: 'addCarriageTotal', title: '加运费总计' },
-                    { field: 'total', title: '总计' }
+                    {title: 'ID', fixed: 'left', sort: true, type: 'numbers'},
+                    {field: 'driverCode', title: '司机编号', sort: true},
+                    {field: 'carryFeeTotal', title: '承运费总计'},
+                    {field: 'addCarriageTotal', title: '加运费总计'},
+                    {field: 'total', title: '总计'}
                 ]]
             });
         } else if (data.index === 3) {
@@ -78,7 +81,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function()
                 height: 'full-170',
                 url: nginx_url + '/monitor/printCar', //数据接口
                 limit: 10,
-                limits: [ 10 ],
+                limits: [10],
                 request: {
                     pageName: 'pageNum', //页码的参数名称，默认：page
                     limitName: 'limit' //每页数据量的参数名，默认：limit
@@ -93,12 +96,12 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function()
                 page: true, //开启分页
                 cellMinWidth: 80,
                 cols: [[
-                    { title: 'ID', fixed: 'left', sort: true, type: 'numbers' },
-                    { field: 'driverName', title: '司机名称', sort: true },
-                    { field: 'carNo', title: '车号' },
-                    { field: 'allowCarryWeight', title: '准载重量' },
-                    { field: 'carWidth', title: '车厢宽度' },
-                    { title: '操作', toolbar: '#bardemo1', fixed: 'right' }
+                    {title: 'ID', fixed: 'left', sort: true, type: 'numbers'},
+                    {field: 'driverName', title: '司机名称', sort: true},
+                    {field: 'carNo', title: '车号'},
+                    {field: 'allowCarryWeight', title: '准载重量'},
+                    {field: 'carWidth', title: '车厢宽度'},
+                    {title: '操作', toolbar: '#bardemo1', fixed: 'right'}
                 ]]
             });
         } else {
@@ -107,7 +110,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function()
                 height: 'full-170',
                 url: nginx_url + '/monitor/printContactsService', //数据接口
                 limit: 10,
-                limits: [ 10 ],
+                limits: [10],
                 request: {
                     pageName: 'pageNum', //页码的参数名称，默认：page
                     limitName: 'limit' //每页数据量的参数名，默认：limit
@@ -122,18 +125,18 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function()
                 page: true, //开启分页
                 cellMinWidth: 80,
                 cols: [[
-                    { title: 'ID', fixed: 'left', sort: true, type: 'numbers' },
-                    { field: 'sendGoodsCustomer', title: '发货客户' },
-                    { field: 'goodsBillCode', title: '货运单编号' },
-                    { field: 'billMoney', title: '本单金额' },
-                    { title: '操作', toolbar: '#barDemo2', fixed: 'right' }
+                    {title: 'ID', fixed: 'left', sort: true, type: 'numbers'},
+                    {field: 'sendGoodsCustomer', title: '发货客户'},
+                    {field: 'goodsBillCode', title: '货运单编号'},
+                    {field: 'billMoney', title: '本单金额'},
+                    {title: '操作', toolbar: '#barDemo2', fixed: 'right'}
                 ]]
             });
         }
     });
 
     // 监听工具条
-    table.on('tool(carCostTool)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+    table.on('tool(carCostTool)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         let data = obj.data; //获得当前行数据
         let layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
         // let tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -142,7 +145,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function()
             layer.open({
                 type: 2,
                 title: '车辆成本详细信息',
-                content: ['vehicle.html?driverCode=' + data.driverCode ],
+                content: ['vehicle.html?driverCode=' + data.driverCode],
                 area: ['85%', '85%'],
                 shadeClose: true,
                 move: false,
@@ -150,7 +153,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function()
         }
     });
 
-    table.on('tool(contactsServiceTool)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+    table.on('tool(contactsServiceTool)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         let data = obj.data; //获得当前行数据
         let layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
         // let tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -159,7 +162,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function()
             layer.open({
                 type: 2,
                 title: '往来业务详细信息',
-                content: ['contacts.html?goodsBillCode=' + data.goodsBillCode ],
+                content: ['contacts.html?goodsBillCode=' + data.goodsBillCode],
                 area: ['85%', '85%'],
                 shadeClose: true,
                 move: false,
@@ -174,7 +177,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function()
             height: 'full-170',
             url: nginx_url + '/monitor/selectCusAcount', //数据接口
             limit: 10,
-            limits: [ 10 ],
+            limits: [10],
             request: {
                 pageName: 'pageNum', //页码的参数名称，默认：page
                 limitName: 'limit' //每页数据量的参数名，默认：limit
@@ -187,15 +190,99 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function()
                 dataName: 'data' //数据列表的字段名称，默认：data
             },
             page: true //开启分页
-            ,cellMinWidth: 80
-            ,cols: [[
-                { title: 'ID', fixed: 'left', sort: true, type: 'numbers' },
-                { field: 'sendGoodsCustomer', title: '发货客户', sort: true },
-                { field: 'carriageTotal', title: '运费总计'},
-                { field: 'insuranceTotal', title: '保险费总计' },
-                { field: 'pieceAmountTotal', title: '件数总计' }
+            , cellMinWidth: 80
+            , cols: [[
+                {title: 'ID', fixed: 'left', sort: true, type: 'numbers'},
+                {field: 'sendGoodsCustomer', title: '发货客户', sort: true},
+                {field: 'carriageTotal', title: '运费总计'},
+                {field: 'insuranceTotal', title: '保险费总计'},
+                {field: 'pieceAmountTotal', title: '件数总计'}
             ]]
         });
+    }
+
+    $(document).ready(function () {
+        $("#b01").click(function () {
+            htmlobj = $.ajax({url: nginx_url + "/monitor/printLineOverall?pageNum=1&limit=10", async: false});
+            let data = htmlobj.responseText;
+            buildData(data);
+        });
+    });
+
+    //生成数据
+    function buildData(data) {
+        let columLabel = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
+        let columName = ['起始-终点', '周二', '周三', '周四', '周五', '周六', '周日'];
+        let columnValue = new Array();
+        let arrData = new Array();
+        for (let  i = 0; i < columLabel.length; i++) {
+            for (let j = 0; j < columName.length; j++) {
+                let arr = Math.floor(Math.random() * 1000 + 1000 * j - 1000 * i);
+                arrData.push(arr);
+            }
+            // console.info(arrData);
+            columnValue.push(eval('(' + ("{'name':'" + columLabel[i] + "','type':'bar','data':[" + arrData + "]}") + ')'));
+        }
+        buildChart(columLabel, columName, columnValue);
+    }//生成数据
+    function buildData() {
+        let columLabel = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
+        let columName = ['起始-终点', '周二', '周三', '周四', '周五', '周六', '周日'];
+        let columnValue = new Array();
+        let arrData = new Array();
+        for (let  i = 0; i < columLabel.length; i++) {
+            for (let j = 0; j < columName.length; j++) {
+                let arr = Math.floor(Math.random() * 1000 + 1000 * j - 1000 * i);
+                arrData.push(arr);
+            }
+            // console.info(arrData);
+            columnValue.push(eval('(' + ("{'name':'" + columLabel[i] + "','type':'bar','data':[" + arrData + "]}") + ')'));
+        }
+        buildChart(columLabel, columName, columnValue);
+    }
+
+    //生成图形
+    function buildChart(columLabel, columName, columnValue) {
+        let chart = document.getElementById('main');
+        let echart = echarts.init(chart);
+        let option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    saveAsImage: {show: true}
+                }
+            },
+            legend: {
+                data: columLabel
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    min: 0,
+                    type: 'category',
+                    data: columName
+                }
+            ],
+            yAxis: [
+                {
+                    min: 0,
+                    type: 'value'
+                }
+            ],
+            series: columnValue
+        };
+        echart.setOption(option);
     }
 
 });
