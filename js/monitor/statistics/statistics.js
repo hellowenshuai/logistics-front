@@ -98,7 +98,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
                 cellMinWidth: 80,
                 cols: [[
                     {title: 'ID', fixed: 'left', sort: true, type: 'numbers'},
-                    {field: 'driverName', title: '司机名称', sort: true},
+                    {field: 'driverCode', title: '司机编号', sort: true},
                     {field: 'carNo', title: '车号'},
                     {field: 'allowCarryWeight', title: '准载重量'},
                     {field: 'carWidth', title: '车厢宽度'},
