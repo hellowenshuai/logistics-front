@@ -5,39 +5,115 @@
     <title>echarts</title>
 </head>
 <body>
-nissdsd
-<div id="main" style="width: 600px;height:400px;">xxx</div>
-<button id="" onclick="create();">xxx</button>
+<div id="main" style="width: 600px;height:400px;"></div>
+<button id="" onclick="create();"><h2>查询图形</h2></button>
 <script>
-
+    //获取数据
     function create() {
-        let id = document.getElementById("main");
-        let echart = echarts.init(id);
-        let option = {
-            legend: {},
-            tooltip: {},
-            dataset: {
-                source: [
-                    ['product', '2015', '2016', '2017'],
-                    ['Matcha Latte', 43.3, 85.8, 93.7],
-                    ['Milk Tea', 83.1, 73.4, 55.1],
-                    ['Cheese Cocoa', 86.4, 65.2, 82.5],
-                    ['Walnut Brownie', 72.4, 53.9, 39.1]
-                ]
+        htmlobj = $.ajax({
+            url: nginx_url + "/monitor/printLineOverall?pageNum=1&limit=10",
+            dataType: "json",
+            async: false,
+            success: function (res) {
+                let dataArray = res.data;
+                buildData(dataArray);
             },
-            xAxis: {type: 'category'},
-            yAxis: {},
+            error: function (res) {
+                alert(res.code);
+            }
+        });
+    }
+
+    //封装数据
+    function buildData(data) {
+        //图标
+        let columnLabels = ['总运费', '总保险费', '总次数'];
+        //x轴
+        let columnNames = new Array();
+        //y轴
+        let allCarriageTotals = new Array();
+        let insuranceTotals = new Array();
+        let times = new Array();
+        for (let i = 0; i < data.length; i++) {
+            //组装x轴
+            let columnName = data[i].loadStation + "至" + data[i].dealGoodsStation;
+            columnNames.push(columnName);
+            //封装series
+            let allCarriageTotal = data[i].allCarriageTotal;
+            allCarriageTotals.push(allCarriageTotal);
+            let insuranceTotal = data[i].insuranceTotal;
+            insuranceTotals.push(insuranceTotal);
+            let time = data[i].times;
+            times.push(time);
+        }
+        buildChart(columnLabels, columnNames, allCarriageTotals, insuranceTotals, times);
+    }
+
+
+    //生成图形
+    function buildChart(columnLabels, columnNames, allCarriageTotals, insuranceTotals, times) {
+        let chart = document.getElementById('main');
+        let echart = echarts.init(chart);
+        let option = {
+            title: {
+                text: '客户运量',
+                subtext: '纯属虚构'
+
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: columnLabels
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {show: true},
+                    dataView: {show: true, readOnly: false},
+                    magicType: {show: true, type: ['line', 'bar']},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            calculable: true,
+            xAxis: [
+                {
+                    type: 'category',
+                    data: columnNames
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
             series: [
-                {type: 'bar'},
-                {type: 'bar'},
-                {type: 'bar'}
+                {
+                    name: '总运费',
+                    type: 'bar',
+                    data: allCarriageTotals
+                },
+                {
+                    name: '总保险费',
+                    type: 'bar',
+                    data: insuranceTotals
+                },
+                {
+                    name: '总次数',
+                    type: 'bar',
+                    data: times
+                }
             ]
         };
         echart.setOption(option);
     }
+
 </script>
 
 <script src="../../js/jquery/jquery-3.3.1.js"></script>
 <script src="../../echarts/echarts.min.js"></script>
+<script src="../../js/nginx.js"></script>
+<script src="../../js/monitor/statistics/statistics.js"></script>
 </body>
 </html>
