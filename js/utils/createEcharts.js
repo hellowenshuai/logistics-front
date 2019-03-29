@@ -88,7 +88,7 @@ function buildData1(data) {
         allCarriageTotals.push(carriageTotal);
         let insuranceTotal = data[i].insuranceTotal;
         insuranceTotals.push(insuranceTotal);
-        let time = data[i].times;
+        let time = data[i].pieceAmountTotal;
         times.push(time);
     }
     buildChart1(columnLabels, columnNames, allCarriageTotals, insuranceTotals, times);
