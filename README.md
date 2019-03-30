@@ -18,4 +18,7 @@
 - 菜鸟：http://www.runoob.com/
 - W3school：http://www.w3school.com.cn/index.html
 
+迭代日志：
+1. 监控分析-统计报表 客户运量，专线整体，司机运量 使用ECharts做出柱形图展示。
+
 
