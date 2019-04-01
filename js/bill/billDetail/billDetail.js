@@ -1,4 +1,4 @@
-layui.use(['layer', 'form', 'element', 'jquery', 'table'], function() {
+layui.use(['layer', 'form', 'element', 'jquery', 'table'], function () {
     let element = layui.element,
         $ = layui.jquery,
         layer = layui.layer,
@@ -9,11 +9,11 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table'], function() {
         elem: '#billTable',
         height: 'full-170',
         url: nginx_url + '/bill/findNotRelease', //数据接口
-        limit: 10,
-        limits: [10],
+        limit: 5,
+        limits: [5, 10],
         request: {
             pageName: 'pageNum' //页码的参数名称，默认：page
-            ,limitName: 'limit' //每页数据量的参数名，默认：limit
+            , limitName: 'limit' //每页数据量的参数名，默认：limit
         },
         response: {
             statusName: 'code', //数据状态的字段名称，默认：code
@@ -23,19 +23,19 @@ layui.use(['layer', 'form', 'element', 'jquery', 'table'], function() {
             dataName: 'data' //数据列表的字段名称，默认：data
         },
         page: true //开启分页
-        ,cellMinWidth: 60
-        ,cols: [[
-            { title: 'ID', fixed: 'left', type: 'numbers', align: 'center' },
-            { field: 'billCode', title: '货运单编号', align: "center",sort: true  },
-            { field: 'billState', title: '单据状态', align: "center" ,sort: true },
-            { field: 'writeDate', title: '填写日期', align: 'center', templet: '#createTime',sort: true },
-            { fixed: 'right', title:"操作", align: "center", toolbar: '#barDemo', width: 200 }
+        , cellMinWidth: 60
+        , cols: [[
+            {title: 'ID', fixed: 'left', type: 'numbers', align: 'center'},
+            {field: 'billCode', title: '货运单编号', align: "center", sort: true},
+            {field: 'billState', title: '单据状态', align: "center", sort: true},
+            {field: 'writeDate', title: '填写日期', align: 'center', templet: '#createTime', sort: true},
+            {fixed: 'right', title: "操作", align: "center", toolbar: '#barDemo', width: 200}
         ]]
     });
 
 });
 
-function createTime(v){
+function createTime(v) {
     let dateTime;
     let date = new Date();
     date.setTime(v);
